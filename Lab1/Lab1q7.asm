@@ -1,0 +1,63 @@
+; SUBROUTINE TO FIND PRIME NUMBERS FROM ARRAY OF NUMBERS
+
+ORG 00H
+
+MOV R0, #0X40
+MOV R1, #0X21
+MOV A, #0X00
+STORE:
+MOV @R0, A
+INC R0
+INC A
+DJNZ R1, STORE
+
+MOV R0, 0X40    
+MOV R1, #21     
+
+MOV R2, #2      
+
+CHECK_LOOP:
+    MOV A, @R0  
+    MOV R3, A       
+	MOV A, R3
+    SUBB A, #2      
+    JC NOT_PRIME    
+
+    MOV R2, #2      
+
+PRIME_CHECK:
+    MOV A, R3       
+	DIV AB          
+    MOV A, B        
+	
+	JZ NOT_PRIME
+
+    INC R2          
+    MOV A, R2
+	MOV A, R3
+	MOV R6, A
+    MOV A, R2
+    SUBB A, R6      
+    JNZ PRIME_CHECK
+
+
+    MOV P0, R3      
+    LCALL DELAY     
+
+NOT_PRIME:
+    INC R0          
+    DJNZ R1, CHECK_LOOP 
+
+SJMP $
+
+ORG 300H
+DELAY:
+MOV R5, 0x50
+HERE1: MOV R6, 0XFF
+HERE2: MOV R7, 0XFF
+HERE3: DJNZ R7, HERE3
+DJNZ R6, HERE2
+DJNZ R5, HERE1
+RET
+
+END

@@ -1,0 +1,24 @@
+#include <reg51.h>
+
+void main() {
+    unsigned char dividend = *(unsigned char *)0x3E;
+    unsigned char = 0x12;
+    unsigned char quotient = 0;
+    unsigned char remainder = 0;
+
+    if (divisor == 0) {
+        quotient = 0;
+        remainder = dividend;
+    } else {
+        while (dividend >= divisor) {
+            dividend -= divisor;
+            quotient++;
+        }
+        remainder = dividend;
+    }
+
+    R4 = quotient;
+    R5 = remainder;
+
+    while (1);
+}
